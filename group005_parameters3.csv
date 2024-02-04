@@ -1,0 +1,7 @@
+name,NeuralNetwork
+library,scikit-learn
+test_size,0.3
+activation,relu
+hidden_layer_sizes,"(100,)"
+max_iter,200
+Accuracy,0.5215014577259475

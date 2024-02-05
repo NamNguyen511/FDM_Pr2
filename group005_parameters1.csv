@@ -1,6 +1,0 @@
-name,RandomForest
-library,scikit-learn
-test_size,0.3
-max_depth,20
-n_estimators,200
-Accuracy,0.48615160349854225

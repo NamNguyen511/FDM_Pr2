@@ -1,6 +1,0 @@
-name,SVM
-library,scikit-learn
-test_size,0.3
-C,10
-kernel,rbf
-Accuracy,0.581997084548105

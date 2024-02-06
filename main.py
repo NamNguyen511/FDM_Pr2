@@ -18,9 +18,10 @@ edge_hist_df.rename(columns={0: "ID"}, inplace=True)
 # Join the datasets on image ID
 data = pd.merge(images_df, edge_hist_df, on='ID')
 data.drop(columns='ID', inplace=True)
-print(data)
+
+
 # Split data into features and labels
-X = data.iloc[:, 1:]  # Assuming first column after 'ID' removal is 'Class'
+X = data.iloc[:, 1:]
 y = data['Class']
 
 
@@ -63,10 +64,11 @@ classifiers = {
     }
 }
 
-# Train and evaluate each classifier
+# GridSearchCV (trains and evaluates each classifier
 for clf_name, clf_conf in classifiers.items():
     grid_search = GridSearchCV(clf_conf['model'], clf_conf['params'], cv=3, n_jobs=-1)
     grid_search.fit(X_train, y_train)
+
     best_clf = grid_search.best_estimator_
     y_pred = best_clf.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
@@ -81,13 +83,13 @@ for clf_name, clf_conf in classifiers.items():
         **grid_search.best_params_
     })
 
-# Function to write confusion matrix and hyperparameters to CSV
-def write_to_csv(group_no, result_no, cm, hyperparameters):
+# Export the best hyperparameters and prediction results to csv
+def export_to_csv(group_no, result_no, cm, hyperparameters):
     # Confusion Matrix
     cm_filename = f"group{group_no}_result{result_no}.csv"
     with open(cm_filename, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([""] + class_labels)  # Header row
+        writer.writerow([""] + class_labels)
         for label, row in zip(class_labels, cm):
             writer.writerow([label] + row.tolist())
 
@@ -98,7 +100,6 @@ def write_to_csv(group_no, result_no, cm, hyperparameters):
         for key, value in hyperparameters.items():
             writer.writerow([key, value])
 
-# Write results for each classifier
-group_no = '056'  # Your group number
+group_no = '056'
 for i, (cm, hyperparameters) in enumerate(zip(confusion_matrices, hyperparameters_list), start=1):
-    write_to_csv(group_no, i, cm, hyperparameters)
+    export_to_csv(group_no, i, cm, hyperparameters)

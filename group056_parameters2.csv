@@ -1,0 +1,6 @@
+name,SVM
+library,scikit-learn
+test_size,0.25
+C,10
+class_weight,balanced
+kernel,rbf

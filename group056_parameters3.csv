@@ -1,0 +1,8 @@
+name,NeuralNetwork
+library,scikit-learn
+test_size,0.25
+activation,logistic
+batch_size,40
+hidden_layer_sizes,"(200,)"
+learning_rate,invscaling
+max_iter,200

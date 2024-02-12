@@ -55,10 +55,10 @@ classifiers = {
     'NeuralNetwork': {
         'model': MLPClassifier(random_state=42),
         'params': {
-            'hidden_layer_sizes': [(50,), (100,100), (100,), (150,), (200,)],
+            'hidden_layer_sizes': [(50,), (100, 100), (100,), (150,), (200,)],
             'activation': ['tanh', 'relu', 'logistic'],
             'batch_size': [20, 40],
-            'learning_rate': ['invscaling'],
+            'learning_rate': ['invscaling', 'adaptive'],
             'max_iter': [200, 300, 350, 400]
         }
     }
